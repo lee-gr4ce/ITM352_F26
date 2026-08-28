@@ -2,3 +2,5 @@
 ITM352 Repo for Class Exercises
 
 This is a really awesome repo that I just created!
+
+It is so amazing that people say they can see it from outer space.
