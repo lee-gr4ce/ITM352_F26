@@ -11,3 +11,5 @@ weight_in_kg = weight_in_lbs_float * LBS_TO_KG # multiply the weight in pounds b
 
 print("You entered:", weight_in_lbs_float)
 print("Your weight in kilograms is:", weight_in_kg)
+
+print("Your weight in kilograms is:", float(input("Enter weight in pounds: ")) * 0.453592)
