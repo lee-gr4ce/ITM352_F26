@@ -1,3 +1,5 @@
+import cryptography
+print("Cryptography version:", cryptography.__version__)
 from cryptography.fernet import Fernet
 
 key = Fernet.generate_key()
