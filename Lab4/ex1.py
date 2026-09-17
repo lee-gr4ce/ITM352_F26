@@ -18,3 +18,5 @@ print("Your full name using .format is {} {}. {}".format(first_name, middle_init
 print("Your full name using .join is " + " ".join([first_name, middle_initial + ".", last_name])) # .join() notation
 # .join() concatenates the strings in the list with a space in between each string. "." is appended into the list to add a period after the middle initial.
 
+fullname = [first_name, middle_initial, last_name]
+print("Your full name using .format is {} {}. {}".format(*fullname)) # .format() notation with unpacking the list into the format string
