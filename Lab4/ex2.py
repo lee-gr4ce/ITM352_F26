@@ -16,3 +16,4 @@ print("Combined response values and IDs:", response_values)
 
 response_values_new = [(1012,5), (1015,7), (1021,3), (1053,8)]
 print("Combined response values and IDs as tuples:", response_values_new)
+
