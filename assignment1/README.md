@@ -1,0 +1,11 @@
+Data Structure Justification
+    The quiz questions were stored in a dictionary in order to provide multiple values for a certain key. In this case, the question serves as the key, and the question answers are the values. This is a more logical option than other data structures like lists because having the option for multiple answer options would require lists within lists, which is less intuitive to read than a dictionary. Keeping the dictionary in a separate JSON file allows for even more readability, and makes it much more organized for future editing and upkeep.
+
+Function Design
+    The non-trivial custom functions were created in order to solve one problem at a time. The get_answer() function creates labels for the multiple values in the dictionary in order to minimize the mispelling of user inputs when answering the quiz. Prepare_questions randomizes the set of questions asked to the user, and ask_question randomizes the answer order then compares it for the correct answer. Each function is specialized so that it provides easy to read logic for the programmer and makes it so that each function isn't mixed together. 
+
+Control Flow
+    The goals of this validating loop is to make sure that the loop does not break when the user inputs a value the algorithm does not recognize. get_answer() minimizes this risk by creating labels to the answer choices, but the algorithm is still sensitive to upper case input and other mistakes. So the loop uses a while loop in order to solve this problem. Since while loops will only continue looping if the condition is true, this loop uses a user entering the CORRECT answer as the "false" condition to break the loop. The condition being if the input is a label defined in labeled_answers. It also accounts for users that may use uppercase, so the condition converts all input into lowercase. 
+
+AI Usage
+    For this assignment, I used VS Code's Copilot AI to assist in debugging and figuring out sytax of what I wanted the algorithm to do. For example, in coding the additional requirement #2, I had trouble figuring out the syntax to use the output from the previous attempts in additional requirement #1, and turning it into an integer for score comparison. 
