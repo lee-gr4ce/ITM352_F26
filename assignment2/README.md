@@ -1,0 +1,5 @@
+Where is your evidence or documentation of testing?
+Throughout the code, I performed several tests to ensure that the code was working properly and to test if the code would break considering the variety of inputs a user could send. I tried a combination of inputs including: 0s, string text when only integers are specified, and large numbers exceeding the range specified. In my testing, the code has held up to every input. I also left some lines that I used to test the reliability of importing the csv file in lines 90 and 91. I created a "fake" csv file to test what would happen to the code if something other than a csv file was imported.
+ 
+How I used AI on this assignment?
+For this assignment, I utilized ChatGPT and VS Code's Copilot to assist in implementing inidividual requirement 3. I had trouble integrating the function of creating sample datasets using a set dataset, so Copilot was partially used to implement the choose_sales_data() function using the prompt: "Make a sample dataset using the original csv file." ChatGPT was also utilized to assist in coding syntax and organization such as the order of which certain lines and sections were placed. 
