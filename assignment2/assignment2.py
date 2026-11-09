@@ -99,7 +99,7 @@ def show_data_summary(df):
         "Number of employees": "employee_id",
         "Number of unique customers": "customer_name",
     }
-
+# STRING FIELD TYPES THAT ARE COUNTED
     for label, field in count_fields.items():
         if field in df.columns:
             values = df[field].dropna()
@@ -112,7 +112,7 @@ def show_data_summary(df):
         "Product categories": "product_category",
         "Unique states": "customer_state",
     }
-
+# VALUE FIELD TYPES THAT ARE LISTED
     for label, field in list_fields.items():
         if field in df.columns:
             values = df[field].dropna()
@@ -122,7 +122,7 @@ def show_data_summary(df):
             print(f"{label}: Unavailable")
 
     if "order_date" in df.columns:
-        # Interpret dates such as 9/2/19 as 9 February 2019.
+        # INTERPRETING DATES IN STRING FORMAT
         dates = pd.to_datetime(
             df["order_date"].astype("string"),
             format="mixed",
@@ -136,7 +136,7 @@ def show_data_summary(df):
             print("Order dates: Unavailable")
     else:
         print("Order dates: Unavailable")
-
+# INTEGER FIELD TYPES THAT CAN BE SUMMED
     if "quantity" in df.columns:
         quantities = pd.to_numeric(df["quantity"], errors="coerce").fillna(0)
         print(f"Total quantities sold: {quantities.sum():,}")
@@ -150,15 +150,16 @@ def show_data_summary(df):
         print("Total sales amount: Unavailable")
 
 show_data_summary(sales_data)
-# REQUIREMENT 2: INTERACTIVE DASHBOARD
+
+# REQUIREMENT 2/3: INTERACTIVE DASHBOARD
 sales_data['sales'] = sales_data['quantity'] * sales_data['unit_price']
 
-def show_grouped(df, group_fields, value_fields, operation):
+def show_grouped(df, group_fields, value_fields, operation): # BASICALLY A PIVOT TABLE FUNCTION THAT ORGANIZES THE VARIABLE NAMES FOR READABILITY
     grouped_data = df.groupby(group_fields)[value_fields]
     result = grouped_data.agg(operation)
     print(result.to_string())
 
-def show_first_rows(df):
+def show_first_rows(df): # MENU ITEM 1
     total_rows = len(df)
 
     if total_rows == 0:
@@ -195,42 +196,42 @@ def show_first_rows(df):
         print(df.head(n))
 
 
-def sales_by_region_and_order(df):
+def sales_by_region_and_order(df): # MENU ITEM 2
     print("\nTotal sales by region and order type")
     show_grouped(df, ['sales_region', "order_type"], ['sales'], "sum")
 
-def average_sales(df):
+def average_sales(df): # MENU ITEM 3
     print("\nAverage sales by region")
     show_grouped(df, ['sales_region', 'customer_state', 'order_type'], ['sales'], "mean")
 
-def sales_by_customer_and_order(df):
+def sales_by_customer_and_order(df):  # MENU ITEM 4
     print("\nTotal sales by customer type and order type by state")
     show_grouped(df, ['customer_state', 'customer_type', 'order_type'], ['sales'], "sum")
 
 
-def quantity_and_price_by_region(df):
+def quantity_and_price_by_region(df): # MENU ITEM 5
     print("\nTotal sales quantity and price by region and product")
     show_grouped(df, ['sales_region', 'produce_name'], ['quantity', 'unit_price'], "sum")
 
 
-def quantity_and_price_by_customer(df):
+def quantity_and_price_by_customer(df): # MENU ITEM 6
     print("\nTotal sales quantity and price by customer type")
     show_grouped(df, ['customer_type'], ['quantity', 'unit_price'], "sum")
 
 
-def price_range_by_category(df):
+def price_range_by_category(df): # MENU ITEM 7
     print("\nMaximum and minimum sales price by category")
     show_grouped(df, ['product_category'], ['unit_price'], ["max", "min"])
 
-def unique_employees_by_region(df):
+def unique_employees_by_region(df): # MENU ITEM 8
     print("\nNumber of unique employees by region")
     employees = df[df["employee_id"] != 0]
     counts = employees.groupby("sales_region")["employee_id"].nunique()
     counts = counts.reindex(df["sales_region"].unique(), fill_value=0)
     print(counts.rename("Unique employees").to_string())
 
-
-def select_pivot_options(title, options, optional=False):
+# REQUIREMENT 4: CUSTOM PIVOT TABLE
+def select_pivot_options(title, options, optional=False): #
     print(f"\n{title}")
 
     for number, option in enumerate(options, start=1):
@@ -304,7 +305,7 @@ def exit_dashboard(df):
     return False
 
 
-MENU = (
+MENU = ( # TUPLE OF MENU OPTIONS WITH LABELS AND CORRESPONDING FUNCTIONS
     ("Show the first n rows of sales data", show_first_rows),
     ("Total sales by region and order type", sales_by_region_and_order),
     ("Average sales by region and by state and sale type", average_sales),
@@ -322,7 +323,7 @@ def run_dashboard(df):
     while True:
         print("\n--- Sales Data Dashboard ---")
 
-        for number, (label, function) in enumerate(MENU, start=1):
+        for number, (label, function) in enumerate(MENU, start=1): # STARTS LIST OF NUMBERS AT 1 INSTEAD OF 0
             print(f"{number}. {label}")
 
         try:
