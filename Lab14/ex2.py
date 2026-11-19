@@ -16,3 +16,4 @@ print("1 Month Interest Rates:")
 
 for index, row in int_rate_table.iterrows():
     print(row["1 mo"])
+

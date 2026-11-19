@@ -18,3 +18,4 @@ print("Public Vehicles and fuel sources:")
 vehicles.info()
 vehicles_by_fuel = vehicles.groupby("vehicle_fuel_source").count()
 print(vehicles_by_fuel)
+
