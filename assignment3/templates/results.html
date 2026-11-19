@@ -2,12 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name ="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Quiz Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
 </head>
 <body>
     <h1>Quiz Results</h1>
-    <p>You scored {{score}} out of {{max_questions}}.</p>
-    <a href = "{{ url_for('index') }}"> Take Quiz Again!</a>
+    <p>You scored {{ score }} out of {{ max_questions }}.</p>
+    {% if score_saved %}
+    <p>Thanks, {{ name }}. Your score is on the leaderboard.</p>
+    <p><a href="{{ url_for('leaderboard') }}">View your ranking and the top 10</a></p>
+    {% else %}
+    <form method="POST" action="{{ url_for('submit_score') }}">
+        <label for="name">Your name:</label>
+        <input id="name" name="name" maxlength="50" required>
+        <button type="submit">Save Score</button>
+    </form>
+    {% if error %}<p role="alert">{{ error }}</p>{% endif %}
+    {% endif %}
+    <p><a href="{{ url_for('index') }}">Take the quiz again</a></p>
 </body>
 </html>

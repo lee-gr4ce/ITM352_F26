@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Leaderboard</title>
+</head>
+<body>
+    <h1>Leaderboard</h1>
+    {% if player_rank %}
+    <p>Your rank: {{ player_rank }} — {{ player_score.name }} ({{ player_score.score }}/{{ player_score.max_score }})</p>
+    {% endif %}
+    <h2>Top 10 Scores</h2>
+    {% if scores %}
+    <ol>
+        {% for entry in scores %}
+        <li>{{ entry.name }} — {{ entry.score }}/{{ entry.max_score }}</li>
+        {% endfor %}
+    </ol>
+    {% else %}
+    <p>No scores yet. Be the first to take the quiz!</p>
+    {% endif %}
+    <p><a href="{{ url_for('index') }}">Back to quiz</a></p>
+</body>
+</html>

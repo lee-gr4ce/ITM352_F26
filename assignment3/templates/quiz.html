@@ -2,17 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name ="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Welcome to the Quiz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
 </head>
 <body>
-    <title> Quiz </title>
-    <form method = "POST"> # sends a POST request to the server when the form is submitted; and only when submit button is clicked
-        <h1> Question {{question_number}}: {{question_text}}</h1>
-        {% for option in options %} # option buttons
-            <input type="radio" name="answer" value="{{option}}"> {{option}}<br>
-        {% endfor %}
+    <h1>Question {{ question_number }} of {{ total_questions }}</h1>
+    {% if timed %}
+    <p>Time remaining: <span id="countdown">{{ timer_seconds }}</span> seconds</p>
+    {% endif %}
+    <form id="answer-form" method="POST" action="{{ url_for('answer') }}">
+        <fieldset>
+            <legend>{{ question }}</legend>
+            {% for option in options %}
+            <label>
+                <input type="radio" name="answer" value="{{ option }}">
+                {{ option }}
+            </label><br>
+            {% endfor %}
+        </fieldset>
         <button type="submit">Submit Answer</button>
     </form>
+    {% if timed %}
+    <script>
+        const countdown = document.getElementById("countdown");
+        const answerForm = document.getElementById("answer-form");
+        let remaining = parseInt("{{ timer_seconds }}", 10) || 0;
+        if (remaining <= 0) {
+            answerForm.requestSubmit();
+        } else {
+            const timer = window.setInterval(() => {
+                remaining -= 1;
+                countdown.textContent = Math.max(remaining, 0);
+                if (remaining <= 0) {
+                    window.clearInterval(timer);
+                    answerForm.requestSubmit();
+                }
+            }, 1000);
+        }
+    </script>
+    {% endif %}
 </body>
 </html>
